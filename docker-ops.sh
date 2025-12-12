@@ -20,13 +20,13 @@ function inside_stop() {
 }
 
 function outside_up() {
-    docker-compose up -d postgresql
+    docker compose up -d postgresql
     sleep 5s
-    docker-compose up -d explorer
+    docker compose up -d explorer
 }
 
 function outside_down() {
-    docker-compose down
+    docker compose down
 }
 
 function outside_initdb() {
@@ -34,7 +34,7 @@ function outside_initdb() {
 }
 
 function outside_deploy() {
-    docker-compose up -d postgresql
+    docker compose up -d postgresql
     for x in {0..5}
     do
         sleep 2
@@ -44,7 +44,7 @@ function outside_deploy() {
         fi
         echo "psql not ready, wait for another 2s."
     done
-    docker-compose up -d explorer
+    docker compose up -d explorer
 }
 
 function outside_cleardb() {

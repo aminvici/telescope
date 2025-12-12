@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   explorer:
@@ -12,16 +12,22 @@ services:
       - "8080"
     ports:
       - "8080:8080"
-    command: "bash docker-ops.sh start"
+    command: "bash docker-ops.sh start "
   postgresql:
-    image: centos/postgresql-96-centos7
+    image: ubuntu/postgres:latest
     container_name: postgresql
     ports:
       - "5432:5432"
     environment:
       - POSTGRESQL_DATABASE=telescope
       - POSTGRESQL_USER=telescope
-      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_PASSWORD= "123456"
     volumes:
       - "../data:/var/lib/pgsql/data"
       - "./app/persistence/postgreSQL/db/:/opt/app-root/src"
+      - "/root/.telescope/pg_data"
+
+
+networks:
+  bridge-network:
+    driver: bridge

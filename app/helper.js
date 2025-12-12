@@ -33,16 +33,11 @@ function readAllFiles (dir) {
 }
 
 /*
-Please assign the logger with the filename for the application logging
-and assign the logger with "pgservice" for database logging for any filename. Please find an example below.
-To stacktrace, please pass the error.stack object to the logger. If there is no error.stack object pass in a
-string with description.
-
 var helper = require("./app/helper");
 var logger = helper.getLogger("main");
 logger.setLevel('INFO');
-
 */
+
 
 var getLogger = function (moduleName) {
   if (moduleName == 'pgservice') {

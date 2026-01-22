@@ -1,8 +1,7 @@
+#!/bin/bash
 #
 #    SPDX-License-Identifier: Apache-2.0
 #
-
-#!/bin/bash
 #
 #Redirecting console.log to log file.
 #Please visit ./logs/app to view the application logs and visit the ./logs/db to view the Database logs and visit the ./log/console for the console.log
@@ -12,7 +11,7 @@ rm -rf /tmp/fabric-client-kvs_peerOrg*
 
 mkdir -p ./logs/app & mkdir -p ./logs/db & mkdir -p ./logs/console
 
-node syncData.js >>logs/console/console1.log-"$(date +%Y-%m-%d)" 2>&1 &\
+node syncData.js >>logs/console/console1.log-"$(date +%Y-%m-%d)" 2>&1 &
 
 sleep 5s
 

@@ -6,10 +6,17 @@ services:
     container_name: explorer
     user: "0:0"
     working_dir: /home/node/app
+    environment:
+      - DATABASE_HOST=10.0.0.11
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=telescope
+      - DATABASE_USERNAME=telescope
+      - DATABASE_PASSWD=123456
     volumes:
       - ".:/home/node/app"
-    expose:
-      - "8080"
+    networks:
+      telescope-net:
+        ipv4_address: 10.0.0.12
     ports:
       - "8080:8080"
     command: "bash docker-ops.sh start "
@@ -17,17 +24,20 @@ services:
     image: ubuntu/postgres:latest
     container_name: postgresql
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
-      - POSTGRESQL_DATABASE=telescope
-      - POSTGRESQL_USER=telescope
-      - POSTGRESQL_PASSWORD= "123456"
+      - POSTGRES_DB=telescope
+      - POSTGRES_USER=telescope
+      - POSTGRES_PASSWORD=123456
     volumes:
       - "../data:/var/lib/pgsql/data"
-      - "./app/persistence/postgreSQL/db/:/opt/app-root/src"
+      - "./app/persistence/postgreSQL/db/:/docker-entrypoint-initdb.d"
       - "/root/.telescope/pg_data"
+    networks:
+      telescope-net:
+        ipv4_address: 10.0.0.11
 
 
 networks:
-  bridge-network:
-    driver: bridge
+  telescope-net:
+    external: true

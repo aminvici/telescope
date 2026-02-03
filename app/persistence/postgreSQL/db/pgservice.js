@@ -20,12 +20,18 @@ var pgconfig = config.pg
 var helper = require('../../../helper.js')
 var logger = helper.getLogger('pgservice')
 
+const envHost = process.env.DATABASE_HOST
+const envPort = process.env.DATABASE_PORT
+const envDatabase = process.env.DATABASE_DATABASE
+const envUsername = process.env.DATABASE_USERNAME
+const envPasswd = process.env.DATABASE_PASSWD
+
 pgconfig = {
-  'host': process.env.DATABASE_HOST || pgconfig.host,
-  'port': process.env.DATABASE_PORT || pgconfig.port,
-  'database': process.env.DATABASE_DATABASE || pgconfig.database,
-  'username': process.env.DATABASE_USERNAME || pgconfig.username,
-  'passwd': process.env.DATABASE_PASSWD || pgconfig.passwd
+  'host': envHost && envHost !== '127.0.0.1' ? envHost : pgconfig.host,
+  'port': envPort && envPort !== '5432' ? envPort : pgconfig.port,
+  'database': envDatabase || pgconfig.database,
+  'username': envUsername || pgconfig.username,
+  'passwd': envPasswd || pgconfig.passwd
 }
 
 const connectionString =

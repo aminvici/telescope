@@ -2,9 +2,8 @@
 --    SPDX-License-Identifier: Apache-2.0
 --
 
-DROP DATABASE IF EXISTS telescope;
-CREATE DATABASE telescope owner telescope;
-\c telescope;
+-- Database telescope is already created by Docker entrypoint
+-- \c telescope;
 --
 
 -- ----------------------------
